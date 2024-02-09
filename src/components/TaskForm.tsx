@@ -8,17 +8,26 @@ import styles from './TaskForm.module.css';
 import { ITask } from '../interfaces/Task';
 
 interface Props {
-  btnText: string
-  taskList: ITask[]
+  btnText: string;
+  taskList: ITask[];
+  task?: ITask | null;
   //Tipando uma função do tipo setter do react...
-  setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>
+  setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
 }
 
-const TaskForm = ({ btnText, taskList, setTaskList }: Props) => {
+const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
 
   const[id, setId] = useState<number>(0);
   const[title, setTitle] = useState<string>('');
   const[difficulty, setDifficulty] = useState<number>(0);
+
+  useEffect(() => {
+    if(task){
+      setId(task.id);
+      setTitle(task.title);
+      setDifficulty(task.difficulty);
+    }
+  }, [task]);
 
   //Tipando o evento recebido
   const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
