@@ -1,9 +1,16 @@
 
+//Components
+import Footer from "./components/Footer"
+import Header from "./components/Header"
+
 function App() {
 
   return (
       <div>
-        TODO REACT
+        <Header />
+        <h1>Conteudo</h1>
+        <Footer />
+        
       </div>
   )
 }
