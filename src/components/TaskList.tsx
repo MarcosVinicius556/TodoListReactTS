@@ -8,9 +8,10 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 interface Props {
   taskList: ITask[]
+  handleDelete(id: number): void
 }
 
-const TaskList = ({ taskList }: Props) => {
+const TaskList = ({ taskList, handleDelete }: Props) => {
   return (
     <>
       {
@@ -23,7 +24,7 @@ const TaskList = ({ taskList }: Props) => {
               </div>
               <div className={styles.actions}>
                 <MdEdit />
-                <FaRegTrashAlt />
+                <FaRegTrashAlt onClick={() => handleDelete(task.id)}/>
               </div>
             </div>
           ))
