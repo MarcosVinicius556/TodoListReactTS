@@ -13,9 +13,10 @@ interface Props {
   task?: ITask | null;
   //Tipando uma função do tipo setter do react...
   setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
+  handleUpdate?(id: number, title: string, difficulty: number): void
 }
 
-const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
+const TaskForm = ({ btnText, taskList, setTaskList, task, handleUpdate }: Props) => {
 
   const[id, setId] = useState<number>(0);
   const[title, setTitle] = useState<string>('');
@@ -32,6 +33,9 @@ const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
   //Tipando o evento recebido
   const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+    if(handleUpdate) {
+      handleUpdate(id, title, difficulty);
+    } else {
       const id = Math.floor(Math.random() * 1000);
       const newTask: ITask = {id, title, difficulty};
 
@@ -43,7 +47,7 @@ const TaskForm = ({ btnText, taskList, setTaskList, task }: Props) => {
 
       setTitle('');
       setDifficulty(0);
-      console.log(taskList);
+    }  
   }
 
   /**
